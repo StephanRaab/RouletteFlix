@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { useState, useEffect } from "react";
 import { useLocalSearchParams, Stack, Link } from "expo-router";
 import { Chip } from "react-native-paper";
@@ -89,7 +89,7 @@ const Genres = () => {
           headerLeft: () => <BackButton />,
         }}
       />
-      {loading && <Text>Loading...</Text>}
+      {loading && <ActivityIndicator size="large" color="#e50914" />}
       {error && <Text>Error: {error}</Text>}
 
       {!loading && !error && (
@@ -147,9 +147,17 @@ const Genres = () => {
               marginTop: 20,
               alignSelf: "center",
             }}
-            href={"/genres/tv"}
+            href={{
+              pathname: "/Recommendation",
+              params: {
+                genreIds: Array.from(selectedGenres).join(","),
+                mediaType: genre,
+              },
+            }}
+            asChild
+            disabled={selectedCount !== 0}
           >
-            <Text onPress={() => console.log(selectedGenres)}>🎲 Roulette</Text>
+            <Text>🎲 Roulette</Text>
           </Link>
         </>
       )}

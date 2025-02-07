@@ -1,6 +1,6 @@
 # Next Steps
 
-## Call the discover endpoint
+## [X] Call the discover endpoint
 
 - Discover Movies: /discover/movie
 - Discover TV Shows: /discover/tv
@@ -351,11 +351,23 @@ for example 99: Documentary responds with
 
 ## Cache the result
 
-## Pick a random movie from the list of movies returned
+## [X] Pick a random movie from the list of movies returned
 
 ## Remove that movie from the list so that it doesn't return
 
 ## If they spin again, re-run the random selector from the cache
+
+## Get poster sizes
+
+https://api.themoviedb.org/3/{mediaType}/{media.id}/images
+
+## Get image
+
+w92, 154, 185, 342 are the poster options
+
+w300, 780, 1280, original for the backdrop_sizes
+
+https://image.tmdb.org/t/p/w342/4rCzaZy5Qkvxh5xaVpHriXSLTgC.jpg
 
 ## Get the data for the movie
 
@@ -402,7 +414,7 @@ interface Movie {
   "original_title": "Jarhead",
   "overview": "Jarhead is a film about a US Marine Anthony Swofford’s experience in the Gulf War. After putting up with an arduous boot camp, Swofford and his unit are sent to the Persian Gulf where they are eager to fight, but are forced to stay back from the action. Swofford struggles with the possibility of his girlfriend cheating on him, and as his mental state deteriorates, his desire to kill increases.",
   "popularity": 23.685,
-  "poster_path": "/4rCzaZy5Qkvxh5xaVpHriXSLTgC.jpg", // /4rCzaZy5Qkvxh5xaVpHriXSLTgC.jpg
+  "poster_path": "/4rCzaZy5Qkvxh5xaVpHriXSLTgC.jpg",
   "production_companies": [
     {
       "id": 14440,
