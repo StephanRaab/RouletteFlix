@@ -173,7 +173,7 @@ const Genres = () => {
         }}
         href={"/genres/tv"}
       >
-        <Text>🎲 Roulette</Text>
+        <Text onPress={() => console.log(selectedGenres)}>🎲 Roulette</Text>
       </Link>
     </View>
   );
