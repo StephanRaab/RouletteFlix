@@ -35,7 +35,7 @@ const MovieIcon: React.FC<IconProps> = ({ width = 20, height = 20 }) => (
 );
 
 const Choices = () => {
-  const [settings, setSettings] = useState("tonight");
+  const [settings, setSettings] = useState("");
 
   useEffect(() => {
     const now = new Date();
@@ -92,11 +92,12 @@ const Choices = () => {
             borderRadius: 5,
             textAlign: "center",
             fontSize: 24,
+            color: "white",
             fontWeight: 800,
           }}
           href={"/genres/tv"}
         >
-          <Text style={{ color: "white" }}>Tv Show</Text>
+          <Text>Tv Show</Text>
         </Link>
         <Link
           style={{
@@ -106,11 +107,12 @@ const Choices = () => {
             borderRadius: 5,
             textAlign: "center",
             fontSize: 24,
+            color: "white",
             fontWeight: 800,
           }}
           href={"/genres/movie"}
         >
-          <Text style={{ color: "white" }}>Movie</Text>
+          <Text>Movie</Text>
         </Link>
       </View>
     </View>
