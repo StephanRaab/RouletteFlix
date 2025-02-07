@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useLocalSearchParams, Stack, Link } from "expo-router";
 import { Chip } from "react-native-paper";
 import { BEARER_TOKEN } from "../../Constants";
+import BackButton from "@/components/BackButton";
 
 interface Genre {
   id: number;
@@ -78,103 +79,80 @@ const Genres = () => {
     setSelectedGenres(newSelectedGenres);
   };
 
-  if (loading) {
-    return (
-      <View>
-        <Stack.Screen
-          options={{
-            title: "Genres",
-            headerStyle: { backgroundColor: "#e50914" },
-            headerShadowVisible: false,
-          }}
-        />
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
-
-  if (error) {
-    return (
-      <View>
-        <Stack.Screen
-          options={{
-            title: "Genres",
-            headerStyle: { backgroundColor: "#e50914" },
-            headerShadowVisible: false,
-          }}
-        />
-        <Text>Error: {error}</Text>
-      </View>
-    );
-  }
-
   return (
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          title: "Movie",
+          title: genre.toUpperCase() || "Genres",
           headerStyle: { backgroundColor: "#e50914" },
           headerShadowVisible: false,
+          headerLeft: () => <BackButton />,
         }}
       />
+      {loading && <Text>Loading...</Text>}
+      {error && <Text>Error: {error}</Text>}
 
-      <Text
-        style={[
-          styles.headerText,
-          {
-            textAlign: "center",
-            marginTop: 30,
-            marginBottom: 30,
-          },
-        ]}
-      >
-        Pick 3 genres that you're interested in {settings}.
-      </Text>
-
-      <View style={styles.chipContainer}>
-        {genres.map((genre) => (
-          <Chip
-            key={genre.id}
+      {!loading && !error && (
+        <>
+          <Text
             style={[
-              styles.chip,
-              selectedGenres.has(genre.id) && styles.selectedChip,
+              styles.headerText,
+              {
+                textAlign: "center",
+                marginTop: 30,
+                marginBottom: 30,
+              },
             ]}
-            selectedColor={selectedGenres.has(genre.id) ? "white" : "black"}
-            onPress={() => handleChipPress(genre)}
           >
-            {genre.name}
-          </Chip>
-        ))}
-      </View>
+            Pick 3 genres that you're interested in {settings}.
+          </Text>
 
-      <Text
-        style={{
-          alignSelf: "flex-end",
-          color: "white",
-          marginTop: 20,
-          marginRight: 20,
-        }}
-      >
-        {selectedCount}/3 remaining
-      </Text>
+          <View style={styles.chipContainer}>
+            {genres.map((genre) => (
+              <Chip
+                key={genre.id}
+                style={[
+                  styles.chip,
+                  selectedGenres.has(genre.id) && styles.selectedChip,
+                ]}
+                selectedColor={selectedGenres.has(genre.id) ? "white" : "black"}
+                onPress={() => handleChipPress(genre)}
+              >
+                {genre.name}
+              </Chip>
+            ))}
+          </View>
 
-      <Link
-        style={{
-          backgroundColor: "#e50914",
-          width: "80%",
-          padding: 10,
-          borderRadius: 5,
-          textAlign: "center",
-          fontSize: 24,
-          fontWeight: 800,
-          color: "white",
-          marginTop: 20,
-          alignSelf: "center",
-        }}
-        href={"/genres/tv"}
-      >
-        <Text onPress={() => console.log(selectedGenres)}>🎲 Roulette</Text>
-      </Link>
+          <Text
+            style={{
+              alignSelf: "flex-end",
+              color: "white",
+              marginTop: 20,
+              marginRight: 20,
+            }}
+          >
+            {selectedCount}/3 remaining
+          </Text>
+
+          <Link
+            style={{
+              backgroundColor: "#e50914",
+              width: "80%",
+              padding: 10,
+              borderRadius: 5,
+              textAlign: "center",
+              fontSize: 24,
+              fontWeight: 800,
+              color: "white",
+              marginTop: 20,
+              alignSelf: "center",
+            }}
+            href={"/genres/tv"}
+          >
+            <Text onPress={() => console.log(selectedGenres)}>🎲 Roulette</Text>
+          </Link>
+        </>
+      )}
     </View>
   );
 };
