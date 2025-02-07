@@ -10,13 +10,12 @@ interface Genre {
 }
 
 interface GenreResponse {
-  // Define the structure of the API response
   genres: Genre[];
 }
 
 const Genres = () => {
   const [selectedCount, setSelectedCount] = useState(3);
-  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState<Set<number>>(new Set());
   const [settings, setSettings] = useState("");
   const { genre } = useLocalSearchParams<{ genre: string }>();
   const [genres, setGenres] = useState<Genre[]>([]);
@@ -64,6 +63,20 @@ const Genres = () => {
 
     fetchGenres();
   }, [genre, settings]);
+
+  const handleChipPress = (genre: Genre) => {
+    const newSelectedGenres = new Set(selectedGenres);
+
+    if (newSelectedGenres.has(genre.id)) {
+      newSelectedGenres.delete(genre.id);
+      setSelectedCount(selectedCount + 1);
+    } else if (selectedCount > 0) {
+      newSelectedGenres.add(genre.id);
+      setSelectedCount(selectedCount - 1);
+    }
+
+    setSelectedGenres(newSelectedGenres);
+  };
 
   if (loading) {
     return (
@@ -120,7 +133,15 @@ const Genres = () => {
 
       <View style={styles.chipContainer}>
         {genres.map((genre) => (
-          <Chip key={genre.id} style={styles.chip} onPress={() => {}}>
+          <Chip
+            key={genre.id}
+            style={[
+              styles.chip,
+              selectedGenres.has(genre.id) && styles.selectedChip,
+            ]}
+            selectedColor={selectedGenres.has(genre.id) ? "white" : "black"}
+            onPress={() => handleChipPress(genre)}
+          >
             {genre.name}
           </Chip>
         ))}
@@ -159,17 +180,8 @@ const Genres = () => {
 };
 
 const styles = StyleSheet.create({
-  genreItem: {
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
-  },
-  genreName: {
-    fontSize: 16,
-  },
   container: {
     flex: 1,
-
     backgroundColor: "#121212",
     paddingLeft: 10,
     paddingRight: 10,
@@ -181,7 +193,10 @@ const styles = StyleSheet.create({
   chip: {
     backgroundColor: "white",
     margin: 4,
-    color: "red",
+  },
+  selectedChip: {
+    backgroundColor: "red",
+    color: "white",
   },
   headerText: {
     fontSize: 36,
