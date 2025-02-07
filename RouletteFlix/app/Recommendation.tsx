@@ -14,6 +14,7 @@ import {
 import { useLocalSearchParams, Stack } from "expo-router";
 import BackButton from "@/components/BackButton";
 import { BEARER_TOKEN } from "@/Constants";
+import MediaDetailsModal from "@/components/MediaDetailsModal";
 
 const screenWidth = Dimensions.get("window").width;
 const imageWidth = screenWidth * 0.54; // 54% of screen width to match your 212px on iPhone 12 Pro
@@ -149,28 +150,11 @@ const Recommendation = () => {
         </>
       )}
 
-      {/* Modal for displaying media details */}
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <MediaDetailsModal
         visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          {currentMedia && (
-            <>
-              <Text style={styles.modalTitle}>{currentMedia.title}</Text>
-              <Text style={styles.modalOverview}>{currentMedia.overview}</Text>
-              <Pressable
-                style={styles.redButton}
-                onPress={() => setModalVisible(false)}
-              >
-                <Text style={styles.redButtonText}>Close</Text>
-              </Pressable>
-            </>
-          )}
-        </View>
-      </Modal>
+        onClose={() => setModalVisible(false)}
+        media={currentMedia}
+      />
     </View>
   );
 };
