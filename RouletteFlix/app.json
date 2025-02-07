@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/splash-image.png",
+        "foregroundImage": "./assets/images/RouletteFlix-white-1x.png",
         "backgroundColor": "#e50914"
       },
       "package": "com.anonymous.RouletteFlix"
@@ -28,7 +28,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-image.png",
+          "image": "./assets/images/RouletteFlix-white-1x.png",
           "imageWidth": 400,
           "resizeMode": "contain",
           "backgroundColor": "#e50914"
