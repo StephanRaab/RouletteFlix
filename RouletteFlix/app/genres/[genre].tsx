@@ -154,18 +154,7 @@ const Genres = () => {
           </Text>
 
           <Link
-            style={{
-              backgroundColor: "#e50914",
-              width: "80%",
-              padding: 10,
-              borderRadius: 5,
-              textAlign: "center",
-              fontSize: 24,
-              fontWeight: 800,
-              color: "white",
-              marginTop: 20,
-              alignSelf: "center",
-            }}
+            style={styles.redButton}
             href={{
               pathname: "/Recommendation",
               params: {
@@ -176,7 +165,7 @@ const Genres = () => {
             asChild
             disabled={selectedCount !== 0}
           >
-            <Text>🎲 Roulette</Text>
+            <Text style={styles.redButtonText}>🎲 Roulette</Text>
           </Link>
         </>
       )}
@@ -207,6 +196,20 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: 800,
     color: "#FFFFFF",
+  },
+  redButton: {
+    backgroundColor: "#e50914",
+    width: "80%",
+    padding: 8,
+    borderRadius: 5,
+    marginTop: 15,
+    alignSelf: "center",
+  },
+  redButtonText: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "800",
+    color: "white",
   },
 });
 

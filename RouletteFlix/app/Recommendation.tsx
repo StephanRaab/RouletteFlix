@@ -4,9 +4,7 @@ import {
   Text,
   StyleSheet,
   ActivityIndicator,
-  Button,
   Pressable,
-  Modal,
   Image,
   Dimensions,
 } from "react-native";
@@ -18,7 +16,7 @@ import MediaDetailsModal from "@/components/MediaDetailsModal";
 
 const screenWidth = Dimensions.get("window").width;
 const imageWidth = screenWidth * 0.54; // 54% of screen width to match your 212px on iPhone 12 Pro
-const imageHeight = imageWidth * (307 / 212); // Maintains your desired aspect ratio
+const imageHeight = imageWidth * (307 / 212); // the ratio I wanted
 
 const Recommendation = () => {
   const { genreIds, mediaType } = useLocalSearchParams<{
@@ -66,6 +64,7 @@ const Recommendation = () => {
         setMediaList(data.results);
         const randomId = Math.floor(Math.random() * data.results.length);
         setCurrentMedia(data.results[randomId]);
+        console.log(data.results[randomId]);
       } else {
         setCurrentMedia(null);
       }
@@ -151,6 +150,7 @@ const Recommendation = () => {
       )}
 
       <MediaDetailsModal
+        mediaType={mediaType}
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         media={currentMedia}
@@ -167,15 +167,15 @@ const styles = StyleSheet.create({
   redButton: {
     backgroundColor: "#e50914",
     width: "80%",
-    padding: 10,
+    padding: 8,
     borderRadius: 5,
-    marginTop: 20,
+    marginTop: 15,
     alignSelf: "center",
   },
   redButtonText: {
     textAlign: "center",
-    fontSize: 24,
-    fontWeight: 800,
+    fontSize: 20,
+    fontWeight: "800",
     color: "white",
   },
   headerText: {
@@ -212,63 +212,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
   },
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
-    padding: 20,
-  },
-  modalTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "white",
-    marginBottom: 10,
-  },
-  modalOverview: {
-    fontSize: 16,
-    color: "white",
-    marginBottom: 20,
-  },
-  image: {
-    width: "100%",
-    marginBottom: 10,
-  },
 });
 
 export default Recommendation;
-
-// import { View, Text, Image } from "react-native";
-// import React from "react";
-// import { Stack } from "expo-router";
-// import BackButton from "@/components/BackButton";
-
-// const Recommendation = () => {
-//   return (
-//     <View
-//       style={{
-//         flex: 1,
-//         justifyContent: "center",
-//         alignItems: "center",
-//         padding: 20,
-//       }}
-//     >
-//       <Stack.Screen
-//         options={{
-//           title: "Recommendations",
-//           headerStyle: { backgroundColor: "#e50914" },
-//           headerShadowVisible: false,
-//           headerLeft: () => <BackButton />,
-//         }}
-//       />
-//       <Image
-//         resizeMode="contain"
-//         style={{ width: 342, height: 342 }}
-//         source={{ uri: "https://placehold.co/342" }}
-//       />
-//       <Text>Recommendation Screen</Text>
-//     </View>
-//   );
-// };
-
-// export default Recommendation;

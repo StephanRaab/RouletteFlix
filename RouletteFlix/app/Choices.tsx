@@ -20,7 +20,7 @@ const Choices = () => {
   }, []);
 
   return (
-    <View style={st.container}>
+    <View style={styles.container}>
       <Stack.Screen
         options={{
           title: "Pick Your Poison",
@@ -44,13 +44,13 @@ const Choices = () => {
       />
 
       <Image
-        style={st.logo}
+        style={styles.logo}
         source={require("../assets/images/RouletteFlix-red-2x.png")}
       />
 
       <Text
         style={[
-          st.headerText,
+          styles.headerText,
           {
             textAlign: "center",
           },
@@ -83,9 +83,7 @@ const Choices = () => {
               color="white"
               style={{ marginRight: 8 }}
             />
-            <Text style={{ fontSize: 24, color: "white", fontWeight: 800 }}>
-              TV Show
-            </Text>
+            <Text style={styles.redButtonText}>TV Show</Text>
           </View>
         </Link>
         <Link
@@ -104,9 +102,7 @@ const Choices = () => {
               size={24}
               color="white"
             />
-            <Text style={{ fontSize: 24, color: "white", fontWeight: 800 }}>
-              Movie
-            </Text>
+            <Text style={styles.redButtonText}>Movie</Text>
           </View>
         </Link>
       </View>
@@ -116,7 +112,7 @@ const Choices = () => {
 
 export default Choices;
 
-const st = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     display: "flex",
     flex: 1,
@@ -133,5 +129,19 @@ const st = StyleSheet.create({
     fontSize: 36,
     fontWeight: 800,
     color: "#FFFFFF",
+  },
+  redButton: {
+    backgroundColor: "#e50914",
+    width: "80%",
+    padding: 8,
+    borderRadius: 5,
+    marginTop: 15,
+    alignSelf: "center",
+  },
+  redButtonText: {
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "800",
+    color: "white",
   },
 });
