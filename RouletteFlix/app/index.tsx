@@ -12,6 +12,19 @@ export default function Index() {
         padding: 20,
       }}
     >
+      <Image
+        style={{
+          position: "absolute",
+          right: 100, // Offsets it to the right
+          top: -40, // Moves it down from the top
+          width: 673,
+          height: 673,
+          opacity: 0.1,
+        }}
+        resizeMode="cover"
+        source={require("../assets/images/roulette-bg.png")}
+      />
+
       <Stack.Screen
         options={{
           title: "",

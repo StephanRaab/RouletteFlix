@@ -31,6 +31,19 @@ const Choices = () => {
       />
 
       <Image
+        style={{
+          position: "absolute",
+          left: 100,
+          top: -40,
+          width: 673,
+          height: 673,
+          opacity: 0.06,
+        }}
+        resizeMode="cover"
+        source={require("../assets/images/roulette-bg.png")}
+      />
+
+      <Image
         style={st.logo}
         source={require("../assets/images/RouletteFlix-red-2x.png")}
       />

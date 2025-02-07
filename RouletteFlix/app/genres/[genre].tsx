@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, Image } from "react-native";
 import { useState, useEffect } from "react";
 import { useLocalSearchParams, Stack, Link } from "expo-router";
 import { Chip } from "react-native-paper";
@@ -22,6 +22,7 @@ const Genres = () => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [getStartedText, setGetStartedText] = useState("");
 
   useEffect(() => {
     const now = new Date();
@@ -33,6 +34,10 @@ const Genres = () => {
     } else {
       setSettings("tonight");
     }
+
+    setGetStartedText(
+      genre === "tv" ? "Pick 3 TV Show genres." : "Pick 3 Movie genres."
+    );
 
     const fetchGenres = async () => {
       setLoading(true);
@@ -89,6 +94,20 @@ const Genres = () => {
           headerLeft: () => <BackButton />,
         }}
       />
+
+      <Image
+        style={{
+          position: "absolute",
+          left: 100,
+          top: -40,
+          width: 673,
+          height: 673,
+          opacity: 0.06,
+        }}
+        resizeMode="cover"
+        source={require("../../assets/images/roulette-bg.png")}
+      />
+
       {loading && <ActivityIndicator size="large" color="#e50914" />}
       {error && <Text>Error: {error}</Text>}
 
@@ -104,7 +123,7 @@ const Genres = () => {
               },
             ]}
           >
-            Pick 3 genres that you're interested in {settings}.
+            {getStartedText}
           </Text>
 
           <View style={styles.chipContainer}>

@@ -64,7 +64,6 @@ const Recommendation = () => {
       if (data.results.length > 0) {
         setMediaList(data.results);
         const randomId = Math.floor(Math.random() * data.results.length);
-        console.log(data.results[randomId]);
         setCurrentMedia(data.results[randomId]);
       } else {
         setCurrentMedia(null);
@@ -96,6 +95,19 @@ const Recommendation = () => {
           headerShadowVisible: false,
           headerLeft: () => <BackButton />,
         }}
+      />
+
+      <Image
+        style={{
+          position: "absolute",
+          left: 100,
+          top: -40,
+          width: 673,
+          height: 673,
+          opacity: 0.06,
+        }}
+        resizeMode="cover"
+        source={require("../assets/images/roulette-bg.png")}
       />
 
       {loading && <ActivityIndicator size="large" color="#e50914" />}
