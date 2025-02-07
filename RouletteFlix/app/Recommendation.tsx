@@ -62,9 +62,7 @@ const Recommendation = () => {
       const data = await response.json();
       if (data.results.length > 0) {
         setMediaList(data.results);
-        const randomId = Math.floor(Math.random() * data.results.length);
-        setCurrentMedia(data.results[randomId]);
-        console.log(data.results[randomId]);
+        setCurrentMedia(Math.floor(Math.random() * data.results.length));
       } else {
         setCurrentMedia(null);
       }
@@ -80,10 +78,6 @@ const Recommendation = () => {
       const randomIndex = Math.floor(Math.random() * mediaList.length);
       setCurrentMedia(mediaList[randomIndex]);
     }
-  };
-
-  const handleThumbnailPress = () => {
-    setModalVisible(true);
   };
 
   return (
@@ -151,7 +145,7 @@ const Recommendation = () => {
 
       <MediaDetailsModal
         mediaType={mediaType}
-        visible={modalVisible}
+        visible={modalVisible && currentMedia !== null}
         onClose={() => setModalVisible(false)}
         media={currentMedia}
       />

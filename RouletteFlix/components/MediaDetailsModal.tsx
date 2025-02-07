@@ -43,8 +43,6 @@ const MediaDetailsModal = ({
   media,
   mediaType,
 }: MediaDetailsModalProps) => {
-  if (!media) return null;
-
   const [genreNames, setGenreNames] = useState<{ [id: number]: string }>({});
   const [loadingGenres, setLoadingGenres] = useState(false);
 
@@ -85,6 +83,8 @@ const MediaDetailsModal = ({
 
     fetchGenreNames();
   }, [media]);
+
+  if (!media) return null;
 
   return (
     <Modal
@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.8)",
     padding: 20,
+    justifyContent: "center",
   },
   modalTitle: {
     fontSize: 18,
