@@ -112,7 +112,7 @@ const Genres = () => {
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          title: "Genres",
+          title: "Movie",
           headerStyle: { backgroundColor: "#e50914" },
           headerShadowVisible: false,
         }}
