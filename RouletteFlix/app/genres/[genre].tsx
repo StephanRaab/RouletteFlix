@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 import { useLocalSearchParams, Stack, Link } from "expo-router";
 import { Chip } from "react-native-paper";
-import Keys from "react-native-keys";
+import { BEARER_TOKEN } from "../../Constants";
 
 interface Genre {
   id: number;
@@ -44,7 +44,7 @@ const Genres = () => {
           method: "GET",
           headers: {
             accept: "application/json",
-            Authorization: Keys.secureFor("BEARER"),
+            Authorization: BEARER_TOKEN,
           },
         };
 
@@ -70,7 +70,7 @@ const Genres = () => {
       <View>
         <Stack.Screen
           options={{
-            title: "Pick Your Poison",
+            title: "Genres",
             headerStyle: { backgroundColor: "#e50914" },
             headerShadowVisible: false,
           }}
@@ -85,7 +85,7 @@ const Genres = () => {
       <View>
         <Stack.Screen
           options={{
-            title: "Pick Your Poison",
+            title: "Genres",
             headerStyle: { backgroundColor: "#e50914" },
             headerShadowVisible: false,
           }}
@@ -99,7 +99,7 @@ const Genres = () => {
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          title: "Pick Your Poison",
+          title: "Genres",
           headerStyle: { backgroundColor: "#e50914" },
           headerShadowVisible: false,
         }}
@@ -189,4 +189,5 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
   },
 });
+
 export default Genres;
