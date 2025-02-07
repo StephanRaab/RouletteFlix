@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/splash-image.png",
         "backgroundColor": "#e50914"
-      }
+      },
+      "package": "com.anonymous.RouletteFlix"
     },
     "web": {
       "bundler": "metro",
