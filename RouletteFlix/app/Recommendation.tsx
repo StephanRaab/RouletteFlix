@@ -8,11 +8,16 @@ import {
   Pressable,
   Modal,
   Image,
+  Dimensions,
 } from "react-native";
 
 import { useLocalSearchParams, Stack } from "expo-router";
 import BackButton from "@/components/BackButton";
 import { BEARER_TOKEN } from "@/Constants";
+
+const screenWidth = Dimensions.get("window").width;
+const imageWidth = screenWidth * 0.54; // 54% of screen width to match your 212px on iPhone 12 Pro
+const imageHeight = imageWidth * (307 / 212); // Maintains your desired aspect ratio
 
 const Recommendation = () => {
   const { genreIds, mediaType } = useLocalSearchParams<{
@@ -100,13 +105,35 @@ const Recommendation = () => {
       )}
       {currentMedia && (
         <>
-          <Image
-            width={100}
-            source={{
-              uri: `https://image.tmdb.org/t/p/w342${currentMedia.poster_path}`,
-            }}
-          />
-          <Button title="🎰 Spin Again?" onPress={handleSpinAgain} />
+          <Text
+            style={[
+              styles.headerText,
+              {
+                textAlign: "center",
+                marginBottom: 30,
+              },
+            ]}
+          >
+            The Wheel has Spoken!
+          </Text>
+          <Pressable onPress={() => setModalVisible(true)}>
+            <Image
+              style={{
+                width: imageWidth,
+                height: imageHeight,
+                borderRadius: 20,
+                resizeMode: "cover",
+              }}
+              source={{
+                uri: `https://image.tmdb.org/t/p/w342${currentMedia.poster_path}`,
+              }}
+            />
+          </Pressable>
+          <Text style={styles.whiteBodyText}>Click image for more info</Text>
+
+          <Pressable style={styles.redButton} onPress={handleSpinAgain}>
+            <Text style={styles.redButtonText}>🎰 Spin Again?</Text>
+          </Pressable>
         </>
       )}
 
@@ -122,7 +149,12 @@ const Recommendation = () => {
             <>
               <Text style={styles.modalTitle}>{currentMedia.title}</Text>
               <Text style={styles.modalOverview}>{currentMedia.overview}</Text>
-              <Button title="Close" onPress={() => setModalVisible(false)} />
+              <Pressable
+                style={styles.redButton}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.redButtonText}>Close</Text>
+              </Pressable>
             </>
           )}
         </View>
@@ -132,6 +164,29 @@ const Recommendation = () => {
 };
 
 const styles = StyleSheet.create({
+  whiteBodyText: {
+    color: "white",
+    padding: 5,
+  },
+  redButton: {
+    backgroundColor: "#e50914",
+    width: "80%",
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+    alignSelf: "center",
+  },
+  redButtonText: {
+    textAlign: "center",
+    fontSize: 24,
+    fontWeight: 800,
+    color: "white",
+  },
+  headerText: {
+    fontSize: 36,
+    fontWeight: 800,
+    color: "#FFFFFF",
+  },
   container: {
     flex: 1,
     justifyContent: "center",
@@ -186,3 +241,38 @@ const styles = StyleSheet.create({
 });
 
 export default Recommendation;
+
+// import { View, Text, Image } from "react-native";
+// import React from "react";
+// import { Stack } from "expo-router";
+// import BackButton from "@/components/BackButton";
+
+// const Recommendation = () => {
+//   return (
+//     <View
+//       style={{
+//         flex: 1,
+//         justifyContent: "center",
+//         alignItems: "center",
+//         padding: 20,
+//       }}
+//     >
+//       <Stack.Screen
+//         options={{
+//           title: "Recommendations",
+//           headerStyle: { backgroundColor: "#e50914" },
+//           headerShadowVisible: false,
+//           headerLeft: () => <BackButton />,
+//         }}
+//       />
+//       <Image
+//         resizeMode="contain"
+//         style={{ width: 342, height: 342 }}
+//         source={{ uri: "https://placehold.co/342" }}
+//       />
+//       <Text>Recommendation Screen</Text>
+//     </View>
+//   );
+// };
+
+// export default Recommendation;
