@@ -68,8 +68,6 @@ const Choices = () => {
         style={[
           st.headerText,
           {
-            display: "flex",
-            flex: 1,
             textAlign: "center",
           },
         ]}
@@ -77,18 +75,43 @@ const Choices = () => {
         What are you into {settings}?
       </Text>
 
-      <View>
-        <Link href={"/genres/tv"}>
-          <Button title="TV Show" />
+      <View
+        style={{
+          marginTop: 50,
+          display: "flex",
+          flexDirection: "row",
+          gap: 20,
+          justifyContent: "space-evenly",
+        }}
+      >
+        <Link
+          style={{
+            backgroundColor: "#e50914",
+            width: "40%",
+            padding: 10,
+            borderRadius: 5,
+            textAlign: "center",
+            fontSize: 24,
+            fontWeight: 800,
+          }}
+          href={"/genres/tv"}
+        >
+          <Text style={{ color: "white" }}>Tv Show</Text>
         </Link>
-        <Link href={"/genres/movie"}>
-          <Button title="Movie" />
+        <Link
+          style={{
+            backgroundColor: "#e50914",
+            width: "40%",
+            padding: 10,
+            borderRadius: 5,
+            textAlign: "center",
+            fontSize: 24,
+            fontWeight: 800,
+          }}
+          href={"/genres/movie"}
+        >
+          <Text style={{ color: "white" }}>Movie</Text>
         </Link>
-        {/* <Link href={"/Genres/tv"}>
-          <SolidButton title="TV Shows" icon={TvIcon} onPress={() => {}} />
-        </Link>
-
-        <SolidButton title="Movie" icon={MovieIcon} onPress={() => {}} /> */}
       </View>
     </View>
   );
