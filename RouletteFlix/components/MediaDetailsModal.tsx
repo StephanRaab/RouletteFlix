@@ -1,4 +1,3 @@
-// components/MediaDetailsModal.tsx
 import { BEARER_TOKEN } from "@/Constants";
 import React, { useEffect, useState } from "react";
 import {
@@ -29,8 +28,8 @@ interface MediaDetailsModalProps {
 }
 
 const screenWidth = Dimensions.get("window").width;
-const imageWidth = screenWidth * 0.33; // 33% of screen width to match my 212px on iPhone 12 Pro
-const imageHeight = imageWidth * (307 / 212); // the ratio I wanted
+const imageWidth = screenWidth * 0.33;
+const imageHeight = imageWidth * (307 / 212);
 
 interface Genre {
   id: number;
@@ -48,7 +47,12 @@ const MediaDetailsModal = ({
 
   useEffect(() => {
     const fetchGenreNames = async () => {
-      if (media && media.genre_ids && media.genre_ids.length > 0) {
+      if (
+        media &&
+        media.genre_ids &&
+        media.genre_ids.length > 0 &&
+        (mediaType === "movie" || mediaType === "tv")
+      ) {
         setLoadingGenres(true);
         try {
           const response = await fetch(
@@ -82,7 +86,7 @@ const MediaDetailsModal = ({
     };
 
     fetchGenreNames();
-  }, [media]);
+  }, [media, mediaType]);
 
   if (!media) return null;
 
@@ -123,7 +127,7 @@ const MediaDetailsModal = ({
               source={{
                 uri: `https://image.tmdb.org/t/p/w342${media.poster_path}`,
               }}
-              onError={(error) => console.error("Image loading error:", error)}
+              onError={(error) => console.error("Image loading error", error)}
             />
           </View>
         </View>
@@ -139,7 +143,7 @@ const MediaDetailsModal = ({
           </Text>
           <View style={styles.chipContainer}>
             {loadingGenres ? (
-              <ActivityIndicator />
+              <ActivityIndicator color="#e50914" />
             ) : (
               media.genre_ids.map((genreId) => (
                 <Chip key={genreId} style={styles.chip}>
@@ -162,7 +166,7 @@ const styles = StyleSheet.create({
   whiteSubHeading: {
     color: "white",
     fontSize: 16,
-    fontWeight: 600,
+    fontWeight: "600",
   },
   whiteBodyText: {
     color: "white",
@@ -184,7 +188,7 @@ const styles = StyleSheet.create({
   modalOverview: {
     fontSize: 14,
     color: "white",
-    width: 175,
+    width: "60%",
     marginRight: 20,
   },
   redButton: {
