@@ -9,6 +9,7 @@ import {
   Modal,
   Image,
 } from "react-native";
+
 import { useLocalSearchParams, Stack } from "expo-router";
 import BackButton from "@/components/BackButton";
 import { BEARER_TOKEN } from "@/Constants";
@@ -57,9 +58,9 @@ const Recommendation = () => {
       const data = await response.json();
       if (data.results.length > 0) {
         setMediaList(data.results);
-        setCurrentMedia(
-          data.results[Math.floor(Math.random() * data.results.length)]
-        );
+        const randomId = Math.floor(Math.random() * data.results.length);
+        console.log(data.results[randomId]);
+        setCurrentMedia(data.results[randomId]);
       } else {
         setCurrentMedia(null);
       }
@@ -99,15 +100,12 @@ const Recommendation = () => {
       )}
       {currentMedia && (
         <>
-          <Pressable onPress={handleThumbnailPress}>
-            <Image
-              style={styles.image}
-              source={{
-                uri: `https://image.tmdb.org/t/p/w342${currentMedia.poster_path}`,
-              }}
-            />
-            <Text style={styles.overview}>{currentMedia.overview}</Text>
-          </Pressable>
+          <Image
+            width={100}
+            source={{
+              uri: `https://image.tmdb.org/t/p/w342${currentMedia.poster_path}`,
+            }}
+          />
           <Button title="🎰 Spin Again?" onPress={handleSpinAgain} />
         </>
       )}
@@ -140,6 +138,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#121212",
     padding: 20,
+    height: "100%",
   },
   title: {
     fontSize: 24,
@@ -182,8 +181,6 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 300,
-    resizeMode: "cover",
     marginBottom: 10,
   },
 });
