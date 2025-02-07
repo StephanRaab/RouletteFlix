@@ -349,19 +349,21 @@ for example 99: Documentary responds with
 - sort_by=popularity.desc
 - sort_by=vote_average.desc
 
-## Cache the result
+## [X] Cache the result
+
+just ended up using in-memory cache. Don't really need to suspend it past that point for now.
 
 ## [X] Pick a random movie from the list of movies returned
 
 ## Remove that movie from the list so that it doesn't return
 
-## If they spin again, re-run the random selector from the cache
+## [X] If they spin again, re-run the random selector from the cache
 
-## Get poster sizes
+## [X] Get poster sizes
 
 https://api.themoviedb.org/3/{mediaType}/{media.id}/images
 
-## Get image
+## [X] Get image
 
 w92, 154, 185, 342 are the poster options
 
@@ -369,14 +371,14 @@ w300, 780, 1280, original for the backdrop_sizes
 
 https://image.tmdb.org/t/p/w342/4rCzaZy5Qkvxh5xaVpHriXSLTgC.jpg
 
-## Get the data for the movie
+## [X] Get the data for the movie
 
 const url = 'https://api.themoviedb.org/3/movie/25?language=en-US';
 
 ```ts
 interface Movie {
   poster_path: string; //thumbnail
-  original_title: string; //title
+  title: string; //title
   overview: string;
   genres: string[];
   runtime: number;

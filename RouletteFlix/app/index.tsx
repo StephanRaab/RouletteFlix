@@ -1,17 +1,9 @@
 import { Stack, Link } from "expo-router";
-import { View, Image } from "react-native";
+import { View, Image, StyleSheet, Text } from "react-native";
 
-export default function Index() {
+function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#e50914",
-        padding: 20,
-      }}
-    >
+    <View style={styles.container}>
       <Image
         style={{
           position: "absolute",
@@ -33,12 +25,50 @@ export default function Index() {
         }}
       />
 
-      <Link href={"/Choices"}>
-        <Image
-          source={require("../assets/images/RouletteFlix-white-2x.png")}
-          style={{ resizeMode: "contain" }}
-        />
+      <Image
+        source={require("../assets/images/RouletteFlix-white-2x.png")}
+        style={styles.logo}
+      />
+
+      <Link style={styles.blackButton} href={"/Choices"}>
+        <Text style={styles.blackButtonText}>🍿 Start the Show</Text>
       </Link>
     </View>
   );
 }
+
+export default Index;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#e50914",
+    padding: 20,
+  },
+  logo: {
+    marginTop: -5,
+    width: "100%",
+    height: 200,
+    resizeMode: "contain",
+  },
+  headerText: {
+    fontSize: 36,
+    fontWeight: 800,
+    color: "#FFFFFF",
+  },
+  blackButton: {
+    backgroundColor: "black",
+    width: "80%",
+    padding: 8,
+    borderRadius: 5,
+    marginTop: 15,
+  },
+  blackButtonText: {
+    fontSize: 20,
+    fontWeight: "800",
+    color: "white",
+    textAlign: "center",
+  },
+});
