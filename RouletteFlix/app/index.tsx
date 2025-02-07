@@ -1,4 +1,5 @@
-import { Text, View } from "react-native";
+import { Stack, Link } from "expo-router";
+import { View, Image } from "react-native";
 
 export default function Index() {
   return (
@@ -7,9 +8,24 @@ export default function Index() {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#e50914",
+        padding: 20,
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Stack.Screen
+        options={{
+          title: "",
+          headerStyle: { backgroundColor: "#e50914" },
+          headerShadowVisible: false,
+        }}
+      />
+
+      <Link href={"/Choices"}>
+        <Image
+          source={require("../assets/images/RouletteFlix-white-2x.png")}
+          style={{ resizeMode: "contain" }}
+        />
+      </Link>
     </View>
   );
 }
