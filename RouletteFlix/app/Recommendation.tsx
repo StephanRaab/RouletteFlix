@@ -15,8 +15,17 @@ import { BEARER_TOKEN } from "@/Constants";
 import MediaDetailsModal from "@/components/MediaDetailsModal";
 
 const screenWidth = Dimensions.get("window").width;
-const imageWidth = screenWidth * 0.54; // 54% of screen width to match your 212px on iPhone 12 Pro
-const imageHeight = imageWidth * (307 / 212); // the ratio I wanted
+const imageWidth = screenWidth * 0.54;
+const imageHeight = imageWidth * (307 / 212);
+
+interface Media {
+  id: number;
+  title: string;
+  overview: string;
+  poster_path: string;
+  genre_ids: number[];
+  vote_average: number;
+}
 
 const Recommendation = () => {
   const { genreIds, mediaType } = useLocalSearchParams<{
@@ -24,20 +33,26 @@ const Recommendation = () => {
     mediaType: string;
   }>();
 
-  const [mediaList, setMediaList] = useState<any[]>([]);
-  const [currentMedia, setCurrentMedia] = useState<any>(null);
+  const [mediaList, setMediaList] = useState<Media[]>([]);
+  const [currentMedia, setCurrentMedia] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    if (genreIds) {
+    if (
+      genreIds &&
+      genreIds.length > 0 &&
+      (mediaType === "movie" || mediaType === "tv")
+    ) {
       const genreIdArray = genreIds.split(",").map(Number);
-      const randomGenreId =
-        genreIdArray[Math.floor(Math.random() * genreIdArray.length)];
-      fetchMedia(randomGenreId);
+      if (genreIdArray.length > 0) {
+        const randomGenreId =
+          genreIdArray[Math.floor(Math.random() * genreIdArray.length)];
+        fetchMedia(randomGenreId);
+      }
     }
-  }, [genreIds]);
+  }, [genreIds, mediaType]);
 
   const fetchMedia = async (genreId: number) => {
     setLoading(true);
@@ -76,7 +91,7 @@ const Recommendation = () => {
   const handleSpinAgain = () => {
     if (mediaList.length > 0) {
       const randomIndex = Math.floor(Math.random() * mediaList.length);
-      setCurrentMedia(mediaList[randomIndex]);
+      setCurrentMedia(randomIndex);
     }
   };
 
@@ -98,7 +113,7 @@ const Recommendation = () => {
           top: -40,
           width: 673,
           height: 673,
-          opacity: 0.06,
+          opacity: 0.08,
         }}
         resizeMode="cover"
         source={require("../assets/images/roulette-bg.png")}
@@ -106,10 +121,10 @@ const Recommendation = () => {
 
       {loading && <ActivityIndicator size="large" color="#e50914" />}
       {error && <Text style={styles.errorText}>Error: {error}</Text>}
-      {!loading && !currentMedia && (
+      {!loading && currentMedia === null && (
         <Text style={styles.noMovieText}>No movies found</Text>
       )}
-      {currentMedia && (
+      {currentMedia !== null && mediaList[currentMedia] && (
         <>
           <Text
             style={[
@@ -122,7 +137,13 @@ const Recommendation = () => {
           >
             The Wheel has Spoken!
           </Text>
-          <Pressable onPress={() => setModalVisible(true)}>
+          <Pressable
+            onPress={() => {
+              if (currentMedia !== null && mediaList[currentMedia]) {
+                setModalVisible(true);
+              }
+            }}
+          >
             <Image
               style={{
                 width: imageWidth,
@@ -131,7 +152,7 @@ const Recommendation = () => {
                 resizeMode: "cover",
               }}
               source={{
-                uri: `https://image.tmdb.org/t/p/w342${currentMedia.poster_path}`,
+                uri: `https://image.tmdb.org/t/p/w342${mediaList[currentMedia].poster_path}`,
               }}
             />
           </Pressable>
@@ -147,7 +168,7 @@ const Recommendation = () => {
         mediaType={mediaType}
         visible={modalVisible && currentMedia !== null}
         onClose={() => setModalVisible(false)}
-        media={currentMedia}
+        media={mediaList[currentMedia!]}
       />
     </View>
   );
@@ -174,7 +195,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 36,
-    fontWeight: 800,
+    fontWeight: "800",
     color: "#FFFFFF",
   },
   container: {
@@ -184,19 +205,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#121212",
     padding: 20,
     height: "100%",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "white",
-    marginBottom: 10,
-    textAlign: "center",
-  },
-  overview: {
-    fontSize: 16,
-    color: "white",
-    marginBottom: 20,
-    textAlign: "center",
   },
   errorText: {
     color: "red",

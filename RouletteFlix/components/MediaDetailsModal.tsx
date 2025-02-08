@@ -21,15 +21,13 @@ interface MediaDetailsModalProps {
     overview: string;
     poster_path: string;
     genre_ids: number[];
-    runtime: number;
     vote_average: number;
-    release_date: string;
   } | null;
 }
 
 const screenWidth = Dimensions.get("window").width;
-const imageWidth = screenWidth * 0.33;
-const imageHeight = imageWidth * (307 / 212);
+const imageWidth = screenWidth * 0.33; // 33% of screen width to match my 212px on iPhone 12 Pro
+const imageHeight = imageWidth * (307 / 212); // the ratio I wanted
 
 interface Genre {
   id: number;
@@ -127,7 +125,7 @@ const MediaDetailsModal = ({
               source={{
                 uri: `https://image.tmdb.org/t/p/w342${media.poster_path}`,
               }}
-              onError={(error) => console.error("Image loading error", error)}
+              onError={() => console.error("Image loading error")}
             />
           </View>
         </View>
@@ -143,7 +141,7 @@ const MediaDetailsModal = ({
           </Text>
           <View style={styles.chipContainer}>
             {loadingGenres ? (
-              <ActivityIndicator color="#e50914" />
+              <ActivityIndicator size="large" color="#e50914" />
             ) : (
               media.genre_ids.map((genreId) => (
                 <Chip key={genreId} style={styles.chip}>
@@ -166,7 +164,7 @@ const styles = StyleSheet.create({
   whiteSubHeading: {
     color: "white",
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: "bold",
   },
   whiteBodyText: {
     color: "white",
@@ -188,7 +186,7 @@ const styles = StyleSheet.create({
   modalOverview: {
     fontSize: 14,
     color: "white",
-    width: "60%",
+    width: 175,
     marginRight: 20,
   },
   redButton: {
