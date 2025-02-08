@@ -15,7 +15,8 @@ interface GenreResponse {
 }
 
 const Genres = () => {
-  const [selectedCount, setSelectedCount] = useState(3);
+  const MAX_SELECTED_GENRES = 3;
+  const [selectedCount, setSelectedCount] = useState(MAX_SELECTED_GENRES);
   const [selectedGenres, setSelectedGenres] = useState<Set<number>>(new Set());
   const [settings, setSettings] = useState("");
   const { genre } = useLocalSearchParams<{ genre: string }>();
@@ -36,7 +37,9 @@ const Genres = () => {
     }
 
     setGetStartedText(
-      genre === "tv" ? "Pick 3 TV Show genres." : "Pick 3 Movie genres."
+      genre === "tv"
+        ? `Pick ${MAX_SELECTED_GENRES} TV Show genres.`
+        : `Pick ${MAX_SELECTED_GENRES} Movie genres.`
     );
 
     const fetchGenres = async () => {
@@ -151,7 +154,7 @@ const Genres = () => {
               marginRight: 20,
             }}
           >
-            {selectedCount}/3 remaining
+            {selectedCount}/{MAX_SELECTED_GENRES} remaining
           </Text>
 
           <Link
