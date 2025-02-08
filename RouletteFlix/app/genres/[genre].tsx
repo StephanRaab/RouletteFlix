@@ -109,7 +109,7 @@ const Genres = () => {
       />
 
       {loading && <ActivityIndicator size="large" color="#e50914" />}
-      {error && <Text>Error: {error}</Text>}
+      {error && <Text style={styles.errorText}>Error: {error}</Text>}
 
       {!loading && !error && (
         <>
@@ -210,6 +210,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "800",
     color: "white",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 16,
+    textAlign: "center",
+    marginTop: 20,
   },
 });
 
