@@ -155,7 +155,10 @@ const Genres = () => {
           </Text>
 
           <Link
-            style={styles.redButton}
+            style={[
+              styles.redButton,
+              selectedCount !== 0 && styles.disabledButton,
+            ]}
             href={{
               pathname: "/Recommendation",
               params: {
@@ -217,6 +220,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     marginTop: 20,
+  },
+  disabledButton: {
+    backgroundColor: "#555",
+    opacity: 0.3,
   },
 });
 
