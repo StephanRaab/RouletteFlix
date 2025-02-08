@@ -136,6 +136,7 @@ const Genres = () => {
                 ]}
                 selectedColor={selectedGenres.has(genre.id) ? "white" : "black"}
                 onPress={() => handleChipPress(genre)}
+                accessibilityLabel={`Select ${genre.name} genre`}
               >
                 {genre.name}
               </Chip>
