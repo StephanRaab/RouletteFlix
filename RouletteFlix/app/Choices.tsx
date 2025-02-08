@@ -3,20 +3,14 @@ import { useEffect, useState } from "react";
 import { Stack, Link, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import BackButton from "../components/BackButton";
+import getTimeOfDay from "@/utils/GetTimeOfDay";
 
 const Choices = () => {
-  const [settings, setSettings] = useState("");
+  type TimeOfDay = "this morning" | "this afternoon" | "tonight";
+  const [settings, setSettings] = useState<TimeOfDay>("this morning");
 
   useEffect(() => {
-    const now = new Date();
-    const timeInHours = now.getHours();
-    if (timeInHours < 12) {
-      setSettings("this morning");
-    } else if (timeInHours >= 12 && timeInHours <= 17) {
-      setSettings("this afternoon");
-    } else {
-      setSettings("tonight");
-    }
+    setSettings(getTimeOfDay());
   }, []);
 
   return (
@@ -66,13 +60,9 @@ const Choices = () => {
         }}
       >
         <Link
-          style={{
-            backgroundColor: "#e50914",
-            width: "auto",
-            borderRadius: 5,
-            padding: 10,
-          }}
+          style={styles.button}
           href={"/genres/tv"}
+          accessibilityLabel="Navigate to TV Show genres"
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Ionicons
@@ -85,13 +75,9 @@ const Choices = () => {
           </View>
         </Link>
         <Link
-          style={{
-            backgroundColor: "#e50914",
-            width: "auto",
-            padding: 10,
-            borderRadius: 5,
-          }}
+          style={styles.button}
           href={"/genres/movie"}
+          accessibilityLabel="Navigate to Movie genres"
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Ionicons
@@ -128,13 +114,11 @@ const styles = StyleSheet.create({
     fontWeight: 800,
     color: "#FFFFFF",
   },
-  redButton: {
+  button: {
     backgroundColor: "#e50914",
-    width: "80%",
-    padding: 8,
+    width: "auto",
     borderRadius: 5,
-    marginTop: 15,
-    alignSelf: "center",
+    padding: 10,
   },
   redButtonText: {
     textAlign: "center",
