@@ -26,6 +26,11 @@ const Genres = () => {
   const [getStartedText, setGetStartedText] = useState("");
 
   useEffect(() => {
+    if (genre !== "movie" && genre !== "tv") {
+      setError("Invalid genre type");
+      return;
+    }
+
     const now = new Date();
     const timeInHours = now.getHours();
     if (timeInHours < 12) {
