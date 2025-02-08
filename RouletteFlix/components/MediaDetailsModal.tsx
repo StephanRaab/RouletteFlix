@@ -17,7 +17,8 @@ interface MediaDetailsModalProps {
   onClose: () => void;
   mediaType: string;
   media: {
-    title: string;
+    title?: string;
+    name?: string;
     overview: string;
     poster_path: string;
     genre_ids: number[];
@@ -104,7 +105,7 @@ const MediaDetailsModal = ({
           }}
         >
           <View style={{ flexDirection: "column" }}>
-            <Text style={styles.modalTitle}>{media.title}</Text>
+            <Text style={styles.modalTitle}>{media.title || media.name}</Text>
             <Text numberOfLines={20} style={styles.modalOverview}>
               {media.overview}
             </Text>

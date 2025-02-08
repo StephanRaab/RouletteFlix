@@ -20,7 +20,8 @@ const imageHeight = imageWidth * (307 / 212);
 
 interface Media {
   id: number;
-  title: string;
+  title?: string;
+  name?: string;
   overview: string;
   poster_path: string;
   genre_ids: number[];
