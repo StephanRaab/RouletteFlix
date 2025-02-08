@@ -1,7 +1,9 @@
 import { Stack, Link } from "expo-router";
 import { View, Image, StyleSheet, Text } from "react-native";
 
-function Index() {
+const BUTTON_WIDTH = "80%";
+
+const Index: React.FC = () => {
   return (
     <View style={styles.container}>
       <Image
@@ -28,12 +30,16 @@ function Index() {
         style={styles.logo}
       />
 
-      <Link style={styles.blackButton} href={"/Choices"}>
+      <Link
+        style={styles.blackButton}
+        href={"/Choices"}
+        accessibilityLabel="Navigate to Choices screen"
+      >
         <Text style={styles.blackButtonText}>🍿 Start the Show</Text>
       </Link>
     </View>
   );
-}
+};
 
 export default Index;
 
@@ -51,21 +57,16 @@ const styles = StyleSheet.create({
     height: 200,
     resizeMode: "contain",
   },
-  headerText: {
-    fontSize: 36,
-    fontWeight: 800,
-    color: "#FFFFFF",
-  },
   blackButton: {
     backgroundColor: "black",
-    width: "80%",
+    width: BUTTON_WIDTH,
     padding: 8,
     borderRadius: 5,
     marginTop: 15,
   },
   blackButtonText: {
     fontSize: 20,
-    fontWeight: "800",
+    fontWeight: "bold",
     color: "white",
     textAlign: "center",
   },

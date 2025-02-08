@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
   redButtonText: {
     textAlign: "center",
     fontSize: 20,
-    fontWeight: "800",
+    fontWeight: "bold",
     color: "white",
   },
   errorText: {

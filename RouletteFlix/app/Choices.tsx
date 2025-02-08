@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 36,
-    fontWeight: 800,
+    fontWeight: "bold",
     color: "#FFFFFF",
   },
   button: {
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   redButtonText: {
     textAlign: "center",
     fontSize: 20,
-    fontWeight: "800",
+    fontWeight: "bold",
     color: "white",
   },
 });
