@@ -106,11 +106,9 @@ const Genres = () => {
       <Image
         style={{
           position: "absolute",
-          left: 200,
+          left: 100,
           top: -40,
-          width: "100%",
-          height: "100%",
-          opacity: 0.06,
+          opacity: 0.04,
         }}
         resizeMode="cover"
         source={require("../../assets/images/roulette-bg.png")}

@@ -111,9 +111,7 @@ const Recommendation = () => {
           position: "absolute",
           left: 100,
           top: -40,
-          width: 673,
-          height: 673,
-          opacity: 0.08,
+          opacity: 0.04,
         }}
         resizeMode="cover"
         source={require("../assets/images/roulette-bg.png")}

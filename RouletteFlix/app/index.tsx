@@ -7,11 +7,9 @@ function Index() {
       <Image
         style={{
           position: "absolute",
-          right: 100, // Offsets it to the right
-          top: -40, // Moves it down from the top
-          width: 673,
-          height: 673,
-          opacity: 0.1,
+          right: 100,
+          top: -40,
+          opacity: 0.06,
         }}
         resizeMode="cover"
         source={require("../assets/images/roulette-bg.png")}
