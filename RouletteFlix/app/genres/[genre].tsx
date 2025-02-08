@@ -101,10 +101,10 @@ const Genres = () => {
       <Image
         style={{
           position: "absolute",
-          left: 100,
+          left: 200,
           top: -40,
-          width: 673,
-          height: 673,
+          width: "100%",
+          height: "100%",
           opacity: 0.06,
         }}
         resizeMode="cover"
@@ -116,18 +116,7 @@ const Genres = () => {
 
       {!loading && !error && (
         <>
-          <Text
-            style={[
-              styles.headerText,
-              {
-                textAlign: "center",
-                marginTop: 30,
-                marginBottom: 30,
-              },
-            ]}
-          >
-            {getStartedText}
-          </Text>
+          <Text style={styles.headerText}>{getStartedText}</Text>
 
           <View style={styles.chipContainer}>
             {genres.map((genre) => (
@@ -201,8 +190,11 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 36,
-    fontWeight: 800,
+    fontWeight: "bold",
     color: "#FFFFFF",
+    textAlign: "center",
+    marginTop: 30,
+    marginBottom: 30,
   },
   redButton: {
     backgroundColor: "#e50914",
