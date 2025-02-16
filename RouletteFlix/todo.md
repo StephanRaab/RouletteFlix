@@ -376,7 +376,7 @@ https://image.tmdb.org/t/p/w342/4rCzaZy5Qkvxh5xaVpHriXSLTgC.jpg
 const url = 'https://api.themoviedb.org/3/movie/25?language=en-US';
 
 ```ts
-interface Movie {
+type Movie = {
   poster_path: string; //thumbnail
   title: string; //title
   overview: string;
@@ -384,7 +384,7 @@ interface Movie {
   runtime: number;
   releaseDate: string;
   vote_average: number; //vote
-}
+};
 ```
 
 ## More screen needed

@@ -5,14 +5,14 @@ import { Chip } from "react-native-paper";
 import { BEARER_TOKEN } from "../../Constants";
 import BackButton from "@/components/BackButton";
 
-interface Genre {
+type Genre = {
   id: number;
   name: string;
-}
+};
 
-interface GenreResponse {
+type GenreResponse = {
   genres: Genre[];
-}
+};
 
 const Genres = () => {
   const MAX_SELECTED_GENRES = 3;

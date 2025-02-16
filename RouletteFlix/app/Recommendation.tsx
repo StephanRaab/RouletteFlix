@@ -18,7 +18,7 @@ const screenWidth = Dimensions.get("window").width;
 const imageWidth = screenWidth * 0.54;
 const imageHeight = imageWidth * (307 / 212);
 
-interface Media {
+type Media = {
   id: number;
   title?: string;
   name?: string;
@@ -26,7 +26,7 @@ interface Media {
   poster_path: string;
   genre_ids: number[];
   vote_average: number;
-}
+};
 
 const Recommendation = () => {
   const { genreIds, mediaType } = useLocalSearchParams<{

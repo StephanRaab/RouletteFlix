@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Chip } from "react-native-paper";
 
-interface MediaDetailsModalProps {
+type MediaDetailsModalProps = {
   visible: boolean;
   onClose: () => void;
   mediaType: string;
@@ -24,16 +24,16 @@ interface MediaDetailsModalProps {
     genre_ids: number[];
     vote_average: number;
   } | null;
-}
+};
 
 const screenWidth = Dimensions.get("window").width;
 const imageWidth = screenWidth * 0.33; // 33% of screen width to match my 212px on iPhone 12 Pro
 const imageHeight = imageWidth * (307 / 212); // the ratio I wanted
 
-interface Genre {
+type Genre = {
   id: number;
   name: string;
-}
+};
 
 const MediaDetailsModal = ({
   visible,
