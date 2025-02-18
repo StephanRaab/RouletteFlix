@@ -1,6 +1,6 @@
 # RouletteFlix
 
-Random Flix Generator
+Random Flix Generator - mobile app built with React Native
 
 ![Board](https://github.com/user-attachments/assets/b230d915-51e6-4e71-92e8-fe010d426aa7)
 
